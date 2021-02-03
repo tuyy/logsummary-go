@@ -37,5 +37,8 @@ func TestSummaryHappy(t *testing.T) {
 	if !reflect.DeepEqual(rz, want) {
 		t.Fatalf("invalid result. rz:%#v want:%#v", rz, want)
 	}
+}
 
+func TestConvertToJson(t *testing.T) {
+	// TODO Summary 구조체로 json string을 생성한다.
 }
