@@ -5,10 +5,7 @@ import (
 	"time"
 )
 
-const (
-	locationStr = "Asia/Seoul"
-	logLayout   = "2006-01-02 15:04:05.999"
-)
+const logLayout = "2006-01-02 15:04:05.999"
 
 type LogData struct {
 	LoggedTime time.Time
@@ -59,8 +56,7 @@ func parseKeyValue(line string, nextIdx int) map[string]string {
 }
 
 func getLocalTime(dtStr string) time.Time {
-	loc, _ := time.LoadLocation(locationStr)
-	dt, err := time.ParseInLocation(logLayout, dtStr, loc)
+	dt, err := time.ParseInLocation(logLayout, dtStr, time.Local)
 	if err != nil {
 		panic(err)
 	}
