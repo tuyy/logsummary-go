@@ -1,12 +1,14 @@
 package parse
 
-import "time"
+import (
+	"time"
+)
 
 type Summary struct {
-	startTime time.Time
-	endTime   time.Time
-	total     int
-	KeyValue  map[string]map[string]int
+	StartTime time.Time                 `json:"start"`
+	EndTime   time.Time                 `json:"end"`
+	Total     int                       `json:"Total"`
+	KeyValue  map[string]map[string]int `json:",omitempty"`
 }
 
 func MakeSummary(logDataList []LogData) Summary {
@@ -15,18 +17,18 @@ func MakeSummary(logDataList []LogData) Summary {
 	}
 
 	result := Summary{
-		startTime: logDataList[0].LoggedTime,
-		endTime:   logDataList[0].LoggedTime,
-		total:     len(logDataList),
+		StartTime: logDataList[0].LoggedTime,
+		EndTime:   logDataList[0].LoggedTime,
+		Total:     len(logDataList),
 		KeyValue:  make(map[string]map[string]int),
 	}
 
 	for _, logData := range logDataList {
-		if logData.LoggedTime.Before(result.startTime) {
-			result.startTime = logData.LoggedTime
+		if logData.LoggedTime.Before(result.StartTime) {
+			result.StartTime = logData.LoggedTime
 		}
-		if logData.LoggedTime.After(result.endTime) {
-			result.endTime = logData.LoggedTime
+		if logData.LoggedTime.After(result.EndTime) {
+			result.EndTime = logData.LoggedTime
 		}
 
 		for key, val := range logData.KeyValue {
