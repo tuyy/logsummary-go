@@ -6,11 +6,11 @@ import (
 )
 
 func TestParseLineHappy(t *testing.T) {
-	input := "[2021-02-01 07:30:20.356 host=test01nmip=10.80.19.2 name=tuyy msg=hello"
+	input := "[2021-02-01 07:30:20.356] host=test01nmip=10.80.19.2 name=tuyy msg=hello"
 
 	_, err := ParseLog(input)
-	if err == nil {
-		t.Fatalf("invalid line")
+	if err != nil {
+		t.Fatalf("invalid line err:%#v", err)
 	}
 }
 
